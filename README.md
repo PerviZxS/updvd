@@ -24,7 +24,7 @@ Apply and postcondition. The action is applied to a copy of the state and the po
 
 Append-only, hash-chained audit log. Every decision, allow or reject, is appended to a log in which each entry carries a hash of the entry before it. Any later alteration, deletion, or reorder is detectable by re-walking the chain.
 
-![updvd architecture](updvd architecture.drawio.svg)
+![updvd architecture](<updvd architecture.drawio.svg>)
 
 ## Structure
 
