@@ -1,0 +1,84 @@
+<mxfile host="Electron">
+  <diagram name="Architecture" id="arch">
+    <mxGraphModel dx="1030" dy="626" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="600" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="proposalBox" parent="1" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=top;fontStyle=1;fontSize=12;" value="PROPOSAL PLANE (untrusted)" vertex="1">
+          <mxGeometry height="360" width="260" x="40" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="llm" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="LLM&#xa;(proposer)&#xa;&#xa;emits proposed&#xa;tool invocation&#xa;I = (T, x)&#xa;&#xa;no execution authority" vertex="1">
+          <mxGeometry height="160" width="180" x="80" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="interceptorBox" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;verticalAlign=top;fontStyle=1;fontSize=12;" value="INTERCEPTOR (verified disposer)" vertex="1">
+          <mxGeometry height="440" width="300" x="380" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="schema" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;" value="1. schema check&#xa;(typed args well-formed?)" vertex="1">
+          <mxGeometry height="50" width="240" x="410" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="pre" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;" value="2. precondition&#xa;(permitted in current state?)" vertex="1">
+          <mxGeometry height="50" width="240" x="410" y="185" as="geometry" />
+        </mxCell>
+        <mxCell id="apply" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;" value="3. apply to candidate state" vertex="1">
+          <mxGeometry height="40" width="240" x="410" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="post" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;" value="4. postcondition&#xa;(result as promised?)" vertex="1">
+          <mxGeometry height="50" width="240" x="410" y="305" as="geometry" />
+        </mxCell>
+        <mxCell id="decision" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;fontStyle=1;" value="commit  |  rollback" vertex="1">
+          <mxGeometry height="90" width="160" x="450" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="execBox" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontStyle=1;fontSize=12;" value="EXECUTION PLANE" vertex="1">
+          <mxGeometry height="440" width="280" x="760" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="state" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=12;" value="authoritative state S&#xa;(typed; only mutated here)" vertex="1">
+          <mxGeometry height="80" width="220" x="790" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="trace" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=12;" value="hash-chained trace&#xa;(tamper-evident;&#xa;every decision logged)" vertex="1">
+          <mxGeometry height="100" width="220" x="790" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="llm" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=10;" target="schema">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1label" parent="1" style="text;html=1;fontSize=10;labelBackgroundColor=#ffffff;" value="propose I=(T,x)" vertex="1">
+          <mxGeometry height="20" width="100" x="300" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="schema" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="pre">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="pre" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="apply">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="apply" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="post">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="post" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="decision">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ecommit" edge="1" parent="1" source="decision" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#82b366;fontSize=10;" target="state">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ecommitlabel" parent="1" style="text;html=1;fontSize=10;fontColor=#82b366;labelBackgroundColor=#ffffff;" value="commit" vertex="1">
+          <mxGeometry height="20" width="60" x="685" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="etrace" edge="1" parent="1" source="decision" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#82b366;" target="trace">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ereject" edge="1" parent="1" source="decision" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#b85450;dashed=1;fontSize=10;exitX=0.5;exitY=1;entryX=0.5;entryY=1;" target="llm">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="530" y="560" />
+              <mxPoint x="170" y="560" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="erejectlabel" parent="1" style="text;html=1;fontSize=10;fontColor=#b85450;labelBackgroundColor=#ffffff;" value="rollback + structured error signal (retry)" vertex="1">
+          <mxGeometry height="20" width="240" x="300" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="caption" parent="1" style="text;html=1;fontSize=11;align=left;verticalAlign=top;" value="Two-plane architecture. The LLM proposes; the interceptor (schema, precondition, postcondition) is the sole path to state mutation. Rejected proposals roll back and return a structured error for retry." vertex="1">
+          <mxGeometry height="40" width="1000" x="40" y="575" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

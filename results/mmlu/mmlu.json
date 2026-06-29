@@ -1,0 +1,17 @@
+{
+  "generated": "2026-06-30T00:30:55",
+  "harness": "lm-evaluation-harness",
+  "lm_eval_version": "0.4.12",
+  "num_fewshot": 0,
+  "limit": 0.1,
+  "limit_overrides": {
+    "qwen3:8b": 0.05
+  },
+  "scores": {
+    "llama3.2:3b": 0.6111888111888112,
+    "gemma3:4b": 0.5741258741258741,
+    "phi4-mini": 0.6433566433566433,
+    "qwen3:4b": 0.6622377622377622,
+    "qwen3:8b": 0.7225274725274725
+  }
+}

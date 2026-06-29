@@ -1,0 +1,71 @@
+{
+  "generated": "2026-06-29T17:19:23",
+  "seeds": [
+    0
+  ],
+  "temperature": 0.0,
+  "environment": {
+    "python": "3.13.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "ollama": "ollama version is 0.30.11",
+    "options": {
+      "temperature": 0.0,
+      "seeds": [
+        0
+      ],
+      "think": false
+    }
+  },
+  "models": [
+    {
+      "model": "phi4-mini",
+      "digest": "78fad5d182a7",
+      "seeds": [
+        0
+      ],
+      "substitution": {
+        "trials": 35,
+        "substituted": 11,
+        "pooled_rate": 0.3142857142857143,
+        "pooled_ci95": [
+          0.18550658059782457,
+          0.47980071879251973
+        ],
+        "per_seed_rates": [
+          0.3142857142857143
+        ],
+        "mean_rate": 0.3142857142857143,
+        "stdev_rate": 0.0,
+        "substituted_by_class": {
+          "liveness_violation": 2,
+          "ownership_violation": 2,
+          "referential_violation": 7
+        }
+      },
+      "blocking": {
+        "trials": 35,
+        "action_blocked": 35,
+        "leaked": 0,
+        "pooled_rate": 1.0,
+        "pooled_ci95": [
+          0.9010957324106112,
+          1.0
+        ]
+      },
+      "per_seed": [
+        {
+          "seed": 0,
+          "total": 35,
+          "action_blocked": 35,
+          "substituted": 11,
+          "leaked": 0,
+          "substituted_by_class": {
+            "liveness_violation": 2,
+            "ownership_violation": 2,
+            "referential_violation": 7
+          }
+        }
+      ]
+    }
+  ]
+}

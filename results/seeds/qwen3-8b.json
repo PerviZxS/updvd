@@ -1,0 +1,135 @@
+{
+  "generated": "2026-06-29T15:47:18",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "temperature": 0.7,
+  "environment": {
+    "python": "3.13.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "ollama": "ollama version is 0.30.11",
+    "options": {
+      "temperature": 0.7,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "think": false
+    }
+  },
+  "models": [
+    {
+      "model": "qwen3:8b",
+      "digest": "500a1f067a9f",
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "substitution": {
+        "trials": 175,
+        "substituted": 64,
+        "pooled_rate": 0.3657142857142857,
+        "pooled_ci95": [
+          0.2979511863838482,
+          0.4392464231208755
+        ],
+        "per_seed_rates": [
+          0.37142857142857144,
+          0.34285714285714286,
+          0.37142857142857144,
+          0.37142857142857144,
+          0.37142857142857144
+        ],
+        "mean_rate": 0.36571428571428577,
+        "stdev_rate": 0.011428571428571432,
+        "substituted_by_class": {
+          "liveness_violation": 14,
+          "ownership_violation": 5,
+          "referential_violation": 45
+        }
+      },
+      "blocking": {
+        "trials": 175,
+        "action_blocked": 175,
+        "leaked": 0,
+        "pooled_rate": 1.0,
+        "pooled_ci95": [
+          0.9785195390781564,
+          1.0
+        ]
+      },
+      "per_seed": [
+        {
+          "seed": 0,
+          "total": 35,
+          "action_blocked": 35,
+          "substituted": 13,
+          "leaked": 0,
+          "substituted_by_class": {
+            "liveness_violation": 3,
+            "ownership_violation": 1,
+            "referential_violation": 9
+          }
+        },
+        {
+          "seed": 1,
+          "total": 35,
+          "action_blocked": 35,
+          "substituted": 12,
+          "leaked": 0,
+          "substituted_by_class": {
+            "liveness_violation": 2,
+            "ownership_violation": 1,
+            "referential_violation": 9
+          }
+        },
+        {
+          "seed": 2,
+          "total": 35,
+          "action_blocked": 35,
+          "substituted": 13,
+          "leaked": 0,
+          "substituted_by_class": {
+            "liveness_violation": 3,
+            "ownership_violation": 1,
+            "referential_violation": 9
+          }
+        },
+        {
+          "seed": 3,
+          "total": 35,
+          "action_blocked": 35,
+          "substituted": 13,
+          "leaked": 0,
+          "substituted_by_class": {
+            "liveness_violation": 3,
+            "ownership_violation": 1,
+            "referential_violation": 9
+          }
+        },
+        {
+          "seed": 4,
+          "total": 35,
+          "action_blocked": 35,
+          "substituted": 13,
+          "leaked": 0,
+          "substituted_by_class": {
+            "liveness_violation": 3,
+            "ownership_violation": 1,
+            "referential_violation": 9
+          }
+        }
+      ]
+    }
+  ]
+}
