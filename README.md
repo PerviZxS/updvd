@@ -170,7 +170,7 @@ python -m pytest -q
 
 ## What the results show
 
-Finding 1, blocking does not depend on the model. Across 35 forbidden tasks per model, run under five seeds (175 trials per model), the forbidden action was blocked every time for every model, with nothing leaking through in any of the 875 trials. The per-action check time was well under 0.1 ms (about 0.05 ms in our runs), with no dependence on the model or the seed.
+Finding 1, blocking does not depend on the model. Across 35 forbidden tasks per model, run under five seeds (175 trials per model), the forbidden action was blocked every time for every model, with nothing leaking through in any of the 875 trials. The per-action check time was well under 0.1 ms (about 0.05 ms in our runs), with no dependence on the model or the seed; this timing is measured live at run time and is reproducible from the released code, not stored in the compact JSON reports.
 
 Finding 2, capable models get around the block. When the forbidden action was rejected, the higher-capability models proposed a different, allowed action that still met the goal behind the request. Pooled over the five seeds this happened in 25.1% of forbidden tasks for qwen3:4b, 28.6% for phi4-mini, and 36.6% for qwen3:8b, while the two weakest models did so only rarely (3.4% for llama3.2:3b and 0.6% for gemma3:4b). The split does not follow parameter count, since the two 4B models land on opposite sides, so capability rather than size orders the models. The layer bounds the action, not the intent.
 
