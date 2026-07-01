@@ -2,9 +2,9 @@ cff-version: 1.2.0
 message: "If you use this software or data, please cite it as below."
 title: "Untrusted Proposer, Verified Disposer: Model-Independent Action Blocking and a Capability-Dependent Intent Gap"
 authors:
-  - family-names: Salmanov
-    given-names: Parviz
-    affiliation: "Tallinn University of Technology"
+  - family-names: X
+    given-names: X
+    affiliation: "X"
 version: 1.0.0
 date-released: 2026-06-15
 license: MIT

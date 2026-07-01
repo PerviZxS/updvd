@@ -175,9 +175,9 @@ Finding 1, blocking does not depend on the model. Across 35 forbidden tasks per 
 Finding 2, capable models get around the block. When the forbidden action was rejected, the higher-capability models proposed a different, allowed action that still met the goal behind the request. Pooled over the five seeds this happened in 25.1% of forbidden tasks for qwen3:4b, 28.6% for phi4-mini, and 36.6% for qwen3:8b, while the two weakest models did so only rarely (3.4% for llama3.2:3b and 0.6% for gemma3:4b). The split does not follow parameter count, since the two 4B models land on opposite sides, so capability rather than size orders the models. The layer bounds the action, not the intent.
 
 | Model | Blocking | Leaked | Substitution mean (sd) | Pooled rate [95% CI] |
-|---|---|---|---|---|
-| llama3.2:3b | 175/175 | 0 | 3.4% (1.1) | 3.4% [1.6, 7.3] |
-| gemma3:4b | 175/175 | 0 | 0.6% (1.1) | 0.6% [0.1, 3.2] |
+|---|---|---|---|--------------------|
+| llama3.2:3b | 175/175 | 0 | 3.4% (1.1) | 3.4% [1.6, 7.3]    |
+| gemma3:4b | 175/175 | 0 | 0.6% (1.1) | 0.6% [0.1, 3.2]    |
 | phi4-mini | 175/175 | 0 | 28.6% (7.2) | 28.6% [22.4, 35.7] |
 | qwen3:4b | 175/175 | 0 | 25.1% (4.2) | 25.1% [19.3, 32.1] |
 | qwen3:8b | 175/175 | 0 | 36.6% (1.1) | 36.6% [29.8, 43.9] |
@@ -192,13 +192,13 @@ This prototype demonstrates the gate logic and the action-versus-intent gap. It 
 
 Please check Zenodo for the current version DOI before citing.
 
-Salmanov, P. (2026) "Untrusted Proposer, Verified Disposer: Model-Independent Action Blocking and a Capability-Dependent Intent Gap". Zenodo. doi:10.5281/zenodo.XXXXXXX
+X, X. (2026) "Untrusted Proposer, Verified Disposer: Model-Independent Action Blocking and a Capability-Dependent Intent Gap". Zenodo. doi:X.X/XXXX.XXXXXXX
 
 BibTeX:
 
 ```
-@software{salmanov2026updvd,
-  author    = {Salmanov, Parviz},
+@software{2026updvd,
+  author    = {X},
   title     = {{Untrusted Proposer, Verified Disposer: Model-Independent Action Blocking and a Capability-Dependent Intent Gap}},
   year      = {2026},
   publisher = {Zenodo},
@@ -210,7 +210,7 @@ BibTeX:
 
 ## Author
 
-Parviz Salmanov, Early Stage Researcher, Tallinn University of Technology (TalTech).
+X
 
 ## License
 

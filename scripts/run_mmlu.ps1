@@ -1,6 +1,5 @@
 # Measure MMLU for the five models under one identical 4-bit setup, so the scores
-# are comparable to each other (this is the capability axis, not a copy of the
-# published model-card numbers).
+# are comparable to each other.
 #
 #   pip install torch --index-url https://download.pytorch.org/whl/cu124
 #   pip install lm-eval "transformers>=4.55,<5" accelerate bitsandbytes
