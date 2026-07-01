@@ -201,7 +201,7 @@ BibTeX:
   author    = {X},
   title     = {{Untrusted Proposer, Verified Disposer: Model-Independent Action Blocking and a Capability-Dependent Intent Gap}},
   year      = {2026},
-  publisher = {Zenodo},
+  publisher = {X},
   version   = {1.0.0},
   doi       = {},
   url       = {}
