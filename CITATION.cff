@@ -6,8 +6,11 @@ authors:
     given-names: Parviz
     affiliation: "Tallinn University of Technology"
     orcid: "https://orcid.org/0009-0007-0072-0496"
-version: 1.0.0
+version: 1.0.1
 license: MIT
+repository-code: "https://github.com/PerviZxS/updvd"
+doi: 10.5281/zenodo.24441494
+date-released: 2026-11-22
 preferred-citation:
   type: conference-paper
   title: "Model-Independent Blocking and a Model-Dependent Substitution of LLM Agent Actions Under Runtime Contract"
