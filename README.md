@@ -1,6 +1,6 @@
 # updvd
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24441494.svg)](https://doi.org/10.5281/zenodo.24441494)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24443861.svg)](https://doi.org/10.5281/zenodo.24443861)
 
 Code and data for the paper "Model-Independent Blocking and Model-Dependent Substitution of LLM Agent Actions Under Runtime Contract" (NGISE 2026, to appear).
 
@@ -238,7 +238,7 @@ Salmanov, P.: Model-Independent Blocking and Model-Dependent Substitution of LLM
 }
 ```
 
-The code and data of this release are archived on Zenodo at https://doi.org/10.5281/zenodo.24441494. To cite them directly, use the "Cite this repository" button on GitHub, which reads `CITATION.cff`.
+The code and data of this release are archived on Zenodo at https://doi.org/10.5281/zenodo.24443861. To cite them directly, use the "Cite this repository" button on GitHub, which reads `CITATION.cff`.
 
 ## Author
 
