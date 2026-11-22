@@ -1,0 +1,162 @@
+{
+  "generated": "2026-10-25T18:39:04",
+  "harness": "lm-evaluation-harness",
+  "num_fewshot": 0,
+  "scores": {
+    "gemma2:2b": 0.5524475524475524,
+    "llama3.2:3b": 0.6097902097902098,
+    "phi3:mini": 0.679020979020979,
+    "gemma3:4b": 0.5517482517482517,
+    "phi4-mini": 0.6307692307692307,
+    "qwen3:4b": 0.644055944055944,
+    "qwen2.5:7b": 0.7062937062937062,
+    "llama3.1:8b": 0.6503496503496503,
+    "qwen3:8b": 0.6958041958041958
+  },
+  "details": {
+    "gemma2:2b": {
+      "acc": 0.5524475524475524,
+      "acc_stderr": 0.012499303830890193,
+      "pretrained": "google/gemma-2-2b-it",
+      "quantization": "bitsandbytes-4bit-fp4",
+      "limit": 0.1,
+      "num_fewshot": [
+        0
+      ],
+      "apply_chat_template": false,
+      "n_samples": 1430,
+      "lm_eval_version": "0.4.12",
+      "transformers_version": "4.51.3",
+      "seed": 1234,
+      "source": "mmlu/gemma2-2b/results.json"
+    },
+    "llama3.2:3b": {
+      "acc": 0.6097902097902098,
+      "acc_stderr": 0.012408936431430428,
+      "pretrained": "meta-llama/Llama-3.2-3B-Instruct",
+      "quantization": "bitsandbytes-4bit-fp4",
+      "limit": 0.1,
+      "num_fewshot": [
+        0
+      ],
+      "apply_chat_template": false,
+      "n_samples": 1430,
+      "lm_eval_version": "0.4.12",
+      "transformers_version": "4.51.3",
+      "seed": 1234,
+      "source": "mmlu/llama3.2-3b/results.json"
+    },
+    "phi3:mini": {
+      "acc": 0.679020979020979,
+      "acc_stderr": 0.011735542465161335,
+      "pretrained": "microsoft/Phi-3-mini-4k-instruct",
+      "quantization": "bitsandbytes-4bit-fp4",
+      "limit": 0.1,
+      "num_fewshot": [
+        0
+      ],
+      "apply_chat_template": false,
+      "n_samples": 1430,
+      "lm_eval_version": "0.4.12",
+      "transformers_version": "4.51.3",
+      "seed": 1234,
+      "source": "mmlu/phi3-mini/results.json"
+    },
+    "gemma3:4b": {
+      "acc": 0.5517482517482517,
+      "acc_stderr": 0.012412189143618316,
+      "pretrained": "google/gemma-3-4b-it",
+      "quantization": "bitsandbytes-4bit-fp4",
+      "limit": 0.1,
+      "num_fewshot": [
+        0
+      ],
+      "apply_chat_template": false,
+      "n_samples": 1430,
+      "lm_eval_version": "0.4.12",
+      "transformers_version": "4.51.3",
+      "seed": 1234,
+      "source": "mmlu/gemma3-4b/results.json"
+    },
+    "phi4-mini": {
+      "acc": 0.6307692307692307,
+      "acc_stderr": 0.012026137946984055,
+      "pretrained": "microsoft/Phi-4-mini-instruct",
+      "quantization": "bitsandbytes-4bit-fp4",
+      "limit": 0.1,
+      "num_fewshot": [
+        0
+      ],
+      "apply_chat_template": false,
+      "n_samples": 1430,
+      "lm_eval_version": "0.4.12",
+      "transformers_version": "4.51.3",
+      "seed": 1234,
+      "source": "mmlu/phi4-mini/results.json"
+    },
+    "qwen3:4b": {
+      "acc": 0.644055944055944,
+      "acc_stderr": 0.01194959631836086,
+      "pretrained": "Qwen/Qwen3-4B",
+      "quantization": "bitsandbytes-4bit-fp4",
+      "limit": 0.1,
+      "num_fewshot": [
+        0
+      ],
+      "apply_chat_template": false,
+      "n_samples": 1430,
+      "lm_eval_version": "0.4.12",
+      "transformers_version": "4.51.3",
+      "seed": 1234,
+      "source": "mmlu/qwen3-4b/results.json"
+    },
+    "qwen2.5:7b": {
+      "acc": 0.7062937062937062,
+      "acc_stderr": 0.011461442240340262,
+      "pretrained": "Qwen/Qwen2.5-7B-Instruct",
+      "quantization": "bitsandbytes-4bit-fp4",
+      "limit": 0.1,
+      "num_fewshot": [
+        0
+      ],
+      "apply_chat_template": false,
+      "n_samples": 1430,
+      "lm_eval_version": "0.4.12",
+      "transformers_version": "4.51.3",
+      "seed": 1234,
+      "source": "mmlu/qwen2.5-7b/results.json"
+    },
+    "llama3.1:8b": {
+      "acc": 0.6503496503496503,
+      "acc_stderr": 0.012034555581568709,
+      "pretrained": "meta-llama/Llama-3.1-8B-Instruct",
+      "quantization": "bitsandbytes-4bit-fp4",
+      "limit": 0.1,
+      "num_fewshot": [
+        0
+      ],
+      "apply_chat_template": false,
+      "n_samples": 1430,
+      "lm_eval_version": "0.4.12",
+      "transformers_version": "4.51.3",
+      "seed": 1234,
+      "source": "mmlu/llama3.1-8b/results.json"
+    },
+    "qwen3:8b": {
+      "acc": 0.6958041958041958,
+      "acc_stderr": 0.011272850807752463,
+      "pretrained": "Qwen/Qwen3-8B",
+      "quantization": "bitsandbytes-4bit-fp4",
+      "limit": 0.1,
+      "num_fewshot": [
+        0
+      ],
+      "apply_chat_template": false,
+      "n_samples": 1430,
+      "lm_eval_version": "0.4.12",
+      "transformers_version": "4.51.3",
+      "seed": 1234,
+      "source": "mmlu/qwen3-8b/results.json"
+    }
+  }
+}

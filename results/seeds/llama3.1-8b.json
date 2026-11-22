@@ -1,0 +1,180 @@
+{
+  "generated": "2026-10-25T15:29:06",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "temperature": 0.7,
+  "environment": {
+    "python": "3.12.13",
+    "platform": "Linux-6.6.122+-x86_64-with-glibc2.39",
+    "ollama": "ollama version is 0.32.5",
+    "gpu": "Tesla T4, 580.82.07",
+    "packages": {
+      "updvd": "1.0.0",
+      "pydantic": "2.13.4",
+      "pydantic-core": "2.46.4",
+      "ollama": "0.6.0"
+    },
+    "model_digests_sha256": {
+      "llama3.1:8b": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e"
+    },
+    "options": {
+      "temperature": 0.7,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "think": false,
+      "format": "json",
+      "keep_alive": "10m",
+      "max_retries": 3
+    }
+  },
+  "models": [
+    {
+      "model": "llama3.1:8b",
+      "digest": "46e0c10c039e",
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "substitution": {
+        "trials": 175,
+        "substituted": 27,
+        "pooled_rate": 0.15428571428571428,
+        "pooled_ci95": [
+          0.10825199414499395,
+          0.21517163883525228
+        ],
+        "per_seed_rates": [
+          0.14285714285714285,
+          0.2,
+          0.14285714285714285,
+          0.14285714285714285,
+          0.14285714285714285
+        ],
+        "mean_rate": 0.15428571428571428,
+        "stdev_rate": 0.022857142857142864,
+        "substituted_by_class": {
+          "authorization_violation": 1,
+          "liveness_violation": 20,
+          "ownership_violation": 2,
+          "referential_violation": 4
+        }
+      },
+      "blocking": {
+        "trials": 175,
+        "action_blocked": 175,
+        "leaked": 0,
+        "pooled_rate": 1.0,
+        "pooled_ci95": [
+          0.9785195390781564,
+          1.0
+        ]
+      },
+      "per_seed": [
+        {
+          "seed": 0,
+          "total": 35,
+          "action_blocked": 35,
+          "substituted": 5,
+          "leaked": 0,
+          "substituted_by_class": {
+            "liveness_violation": 4,
+            "referential_violation": 1
+          },
+          "observed_recovery": {
+            "recoverable": 0,
+            "recovered": 0,
+            "rate": 0.0
+          }
+        },
+        {
+          "seed": 1,
+          "total": 35,
+          "action_blocked": 35,
+          "substituted": 7,
+          "leaked": 0,
+          "substituted_by_class": {
+            "authorization_violation": 1,
+            "liveness_violation": 4,
+            "ownership_violation": 1,
+            "referential_violation": 1
+          },
+          "observed_recovery": {
+            "recoverable": 1,
+            "recovered": 1,
+            "rate": 1.0
+          }
+        },
+        {
+          "seed": 2,
+          "total": 35,
+          "action_blocked": 35,
+          "substituted": 5,
+          "leaked": 0,
+          "substituted_by_class": {
+            "liveness_violation": 3,
+            "ownership_violation": 1,
+            "referential_violation": 1
+          },
+          "observed_recovery": {
+            "recoverable": 0,
+            "recovered": 0,
+            "rate": 0.0
+          }
+        },
+        {
+          "seed": 3,
+          "total": 35,
+          "action_blocked": 35,
+          "substituted": 5,
+          "leaked": 0,
+          "substituted_by_class": {
+            "liveness_violation": 4,
+            "referential_violation": 1
+          },
+          "observed_recovery": {
+            "recoverable": 0,
+            "recovered": 0,
+            "rate": 0.0
+          }
+        },
+        {
+          "seed": 4,
+          "total": 35,
+          "action_blocked": 35,
+          "substituted": 5,
+          "leaked": 0,
+          "substituted_by_class": {
+            "liveness_violation": 5
+          },
+          "observed_recovery": {
+            "recoverable": 1,
+            "recovered": 1,
+            "rate": 1.0
+          }
+        }
+      ]
+    }
+  ],
+  "overhead_ms": {
+    "llama3.1:8b": {
+      "n": 728,
+      "p50": 0.06945549966985709,
+      "mean": 0.09042127336230335,
+      "p99": 0.15006599915068364,
+      "max": 12.446534000446263
+    }
+  }
+}

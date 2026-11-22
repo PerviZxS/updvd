@@ -1,0 +1,19 @@
+# Top-level versions for the full paper run on Google Colab (Tesla T4).
+# The full lock installed by scripts/run_all.sh is requirements-colab.txt, generated from this file with:
+#   uv pip compile requirements-colab.in --python-version 3.12 --python-platform x86_64-manylinux_2_35 \
+#       --index-strategy unsafe-best-match --emit-index-url -o requirements-colab.txt
+# torch builds come from the PyTorch CUDA 12.8 index; everything else from PyPI.
+--extra-index-url https://download.pytorch.org/whl/cu128
+torch==2.11.0+cu128
+torchvision==0.26.0+cu128
+torchaudio==2.11.0+cu128
+transformers==4.51.3
+lm_eval[hf]==0.4.12
+accelerate==1.14.0
+bitsandbytes==0.50.0
+huggingface_hub==0.36.2
+pydantic==2.13.4
+ollama==0.6.0
+pytest==8.4.2
+# Same numpy as the original T4 runs (recorded in the harness environment dump).
+numpy==2.0.2

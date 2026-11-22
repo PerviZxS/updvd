@@ -1,0 +1,4 @@
+# Keep Unix line endings, so the shell scripts also run on Linux and Colab.
+* text=auto eol=lf
+*.pdf binary
+*.png binary

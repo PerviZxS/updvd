@@ -1,0 +1,13 @@
+time=2026-10-25T17:02:10.513Z level=INFO source=routes.go:1947 msg="server config" env="map[CUDA_VISIBLE_DEVICES: GGML_VK_VISIBLE_DEVICES: GPU_DEVICE_ORDINAL: HIP_VISIBLE_DEVICES: HSA_OVERRIDE_GFX_VERSION: HTTPS_PROXY: HTTP_PROXY: LLAMA_ARG_FIT: LLAMA_ARG_FIT_TARGET: NO_PROXY: OLLAMA_CONTEXT_LENGTH:0 OLLAMA_DEBUG:INFO OLLAMA_DEBUG_LOG_REQUESTS:false OLLAMA_EDITOR: OLLAMA_FLASH_ATTENTION:false OLLAMA_GO_TEMPLATE:true OLLAMA_GPU_OVERHEAD:0 OLLAMA_HOST:http://127.0.0.1:11434 OLLAMA_IGPU_ENABLE: OLLAMA_KEEP_ALIVE:5m0s OLLAMA_KV_CACHE_TYPE: OLLAMA_LLM_LIBRARY: OLLAMA_LOAD_TIMEOUT:5m0s OLLAMA_MAX_LOADED_MODELS:0 OLLAMA_MAX_QUEUE:512 OLLAMA_MAX_TRANSFER_STREAMS:4 OLLAMA_MODELS:/root/.ollama/models OLLAMA_NOHISTORY:false OLLAMA_NOPRUNE:false OLLAMA_NO_CLOUD:false OLLAMA_NUM_PARALLEL:1 OLLAMA_ORIGINS:[http://localhost https://localhost http://localhost:* https://localhost:* http://127.0.0.1 https://127.0.0.1 http://127.0.0.1:* https://127.0.0.1:* http://0.0.0.0 https://0.0.0.0 http://0.0.0.0:* https://0.0.0.0:* app://* file://* tauri://* vscode-webview://* vscode-file://*] OLLAMA_REMOTES:[ollama.com] OLLAMA_SCHED_SPREAD:false OLLAMA_VULKAN:true ROCR_VISIBLE_DEVICES: http_proxy: https_proxy: no_proxy:]"
+time=2026-10-25T17:02:10.520Z level=INFO source=routes.go:1949 msg="Ollama cloud disabled: false"
+time=2026-10-25T17:02:10.521Z level=INFO source=images.go:883 msg="total blobs: 0"
+time=2026-10-25T17:02:10.522Z level=INFO source=images.go:890 msg="total unused blobs removed: 0"
+time=2026-10-25T17:02:10.523Z level=INFO source=routes.go:2004 msg="Listening on 127.0.0.1:11434 (version 0.32.5)"
+time=2026-10-25T17:02:10.526Z level=INFO source=model_list_cache.go:112 msg="model list cache hydration complete" models=0 failures=0 elapsed=168.256µs
+time=2026-10-25T17:02:10.535Z level=INFO source=runner.go:60 msg="discovering available GPUs..."
+time=2026-10-25T17:02:10.840Z level=INFO source=model_recommendations.go:177 msg="model recommendations cache sleep scheduled" wait=4h44m9.538419107s consecutive_failures=0
+time=2026-10-25T17:02:19.149Z level=INFO source=types.go:32 msg="inference compute" id=0 filter_id=0 library=CUDA compute=7.5 name=CUDA0 description="Tesla T4" libdirs=ollama,cuda_v13 driver=13.0 pci_id=0000:00:04.0 type=discrete total="14.6 GiB" available="14.5 GiB"
+time=2026-10-25T17:02:19.150Z level=INFO source=routes.go:2054 msg="vram-based default context" total_vram="14.6 GiB" default_num_ctx=4096
+[GIN] 2026/10/25 - 17:02:19 | 200 |     200.004µs |       127.0.0.1 | GET      "/api/version"
+[GIN] 2026/10/25 - 17:02:19 | 200 |      45.272µs |       127.0.0.1 | GET      "/api/version"
+[GIN] 2026/10/25 - 17:02:19 | 200 |      76.412µs |       127.0.0.1 | GET      "/api/version"

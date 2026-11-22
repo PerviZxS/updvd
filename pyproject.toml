@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "updvd"
+version = "1.0.0"
+description = "A Design-by-Contract execution layer for LLM agents"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Parviz Salmanov", email = "parviz.salmanov@taltech.ee" }]
+dependencies = [
+    "pydantic==2.13.4",
+]
+
+[project.optional-dependencies]
+llm = ["ollama==0.6.0"]
+dev = ["pytest==8.4.2"]
+figures = ["matplotlib==3.10.9"]
+
+[project.scripts]
+updvd = "updvd.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

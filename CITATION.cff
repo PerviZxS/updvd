@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software or data, please cite it as below."
+title: "Model-Independent Blocking and a Model-Dependent Substitution of LLM Agent Actions Under Runtime Contract"
+authors:
+  - family-names: Salmanov
+    given-names: Parviz
+    affiliation: "Tallinn University of Technology"
+    orcid: "https://orcid.org/0009-0007-0072-0496"
+version: 1.0.0
+license: MIT
+preferred-citation:
+  type: conference-paper
+  title: "Model-Independent Blocking and a Model-Dependent Substitution of LLM Agent Actions Under Runtime Contract"
+  authors:
+    - family-names: Salmanov
+      given-names: Parviz
+      affiliation: "Tallinn University of Technology"
+      orcid: "https://orcid.org/0009-0007-0072-0496"
+  conference:
+    name: "NGISE 2026"
+  publisher:
+    name: "Springer"
+  year: 2026

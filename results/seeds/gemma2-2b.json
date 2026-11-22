@@ -1,0 +1,182 @@
+{
+  "generated": "2026-10-25T13:00:14",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "temperature": 0.7,
+  "environment": {
+    "python": "3.12.13",
+    "platform": "Linux-6.6.122+-x86_64-with-glibc2.39",
+    "ollama": "ollama version is 0.32.5",
+    "gpu": "Tesla T4, 580.82.07",
+    "packages": {
+      "updvd": "1.0.0",
+      "pydantic": "2.13.4",
+      "pydantic-core": "2.46.4",
+      "ollama": "0.6.0"
+    },
+    "model_digests_sha256": {
+      "gemma2:2b": "8ccf136fdd5298f3ffe2d69862750ea7fb56555fa4d5b18c04e3fa4d82ee09d7"
+    },
+    "options": {
+      "temperature": 0.7,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "think": false,
+      "format": "json",
+      "keep_alive": "10m",
+      "max_retries": 3
+    }
+  },
+  "models": [
+    {
+      "model": "gemma2:2b",
+      "digest": "8ccf136fdd52",
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "substitution": {
+        "trials": 175,
+        "substituted": 19,
+        "pooled_rate": 0.10857142857142857,
+        "pooled_ci95": [
+          0.07061513886953752,
+          0.1633438505378487
+        ],
+        "per_seed_rates": [
+          0.08571428571428572,
+          0.14285714285714285,
+          0.08571428571428572,
+          0.08571428571428572,
+          0.14285714285714285
+        ],
+        "mean_rate": 0.10857142857142857,
+        "stdev_rate": 0.027994168488950602,
+        "substituted_by_class": {
+          "liveness_violation": 5,
+          "ownership_violation": 5,
+          "referential_violation": 9
+        }
+      },
+      "blocking": {
+        "trials": 175,
+        "action_blocked": 175,
+        "leaked": 0,
+        "pooled_rate": 1.0,
+        "pooled_ci95": [
+          0.9785195390781564,
+          1.0
+        ]
+      },
+      "per_seed": [
+        {
+          "seed": 0,
+          "total": 35,
+          "action_blocked": 35,
+          "substituted": 3,
+          "leaked": 0,
+          "substituted_by_class": {
+            "liveness_violation": 1,
+            "ownership_violation": 1,
+            "referential_violation": 1
+          },
+          "observed_recovery": {
+            "recoverable": 0,
+            "recovered": 0,
+            "rate": 0.0
+          }
+        },
+        {
+          "seed": 1,
+          "total": 35,
+          "action_blocked": 35,
+          "substituted": 5,
+          "leaked": 0,
+          "substituted_by_class": {
+            "liveness_violation": 1,
+            "ownership_violation": 1,
+            "referential_violation": 3
+          },
+          "observed_recovery": {
+            "recoverable": 1,
+            "recovered": 1,
+            "rate": 1.0
+          }
+        },
+        {
+          "seed": 2,
+          "total": 35,
+          "action_blocked": 35,
+          "substituted": 3,
+          "leaked": 0,
+          "substituted_by_class": {
+            "liveness_violation": 1,
+            "ownership_violation": 1,
+            "referential_violation": 1
+          },
+          "observed_recovery": {
+            "recoverable": 1,
+            "recovered": 1,
+            "rate": 1.0
+          }
+        },
+        {
+          "seed": 3,
+          "total": 35,
+          "action_blocked": 35,
+          "substituted": 3,
+          "leaked": 0,
+          "substituted_by_class": {
+            "liveness_violation": 1,
+            "ownership_violation": 1,
+            "referential_violation": 1
+          },
+          "observed_recovery": {
+            "recoverable": 0,
+            "recovered": 0,
+            "rate": 0.0
+          }
+        },
+        {
+          "seed": 4,
+          "total": 35,
+          "action_blocked": 35,
+          "substituted": 5,
+          "leaked": 0,
+          "substituted_by_class": {
+            "liveness_violation": 1,
+            "ownership_violation": 1,
+            "referential_violation": 3
+          },
+          "observed_recovery": {
+            "recoverable": 0,
+            "recovered": 0,
+            "rate": 0.0
+          }
+        }
+      ]
+    }
+  ],
+  "overhead_ms": {
+    "gemma2:2b": {
+      "n": 724,
+      "p50": 0.0678355000331976,
+      "mean": 0.06757198342192049,
+      "p99": 0.1363129999845114,
+      "max": 0.2673320000212698
+    }
+  }
+}
