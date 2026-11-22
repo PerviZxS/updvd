@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "updvd"
-version = "1.0.1"
+version = "1.0.2"
 description = "A Design-by-Contract execution layer for LLM agents"
 readme = "README.md"
 requires-python = ">=3.10"

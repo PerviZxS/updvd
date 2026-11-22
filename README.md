@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24441494.svg)](https://doi.org/10.5281/zenodo.24441494)
 
-Code and data for the paper "Model-Independent Blocking and a Model-Dependent Substitution of LLM Agent Actions Under Runtime Contract" (NGISE 2026, to appear).
+Code and data for the paper "Model-Independent Blocking and Model-Dependent Substitution of LLM Agent Actions Under Runtime Contract" (NGISE 2026, to appear).
 
 ## What this is
 
@@ -146,6 +146,8 @@ The paper uses MMLU rather than parameter count as its measure of capability. We
 
 Each model's harness output is saved to `results/mmlu/<tag>/results.json`, and its `config` block records these settings. `results/mmlu/mmlu.json` collects the scores together with where each one came from. Once that file exists, `updvd analyze` adds an MMLU column and a table ordered by MMLU.
 
+One model differs between the two measurements. At run time the Ollama tag `qwen3:4b` resolved to Qwen3-4B-Thinking-2507 (the server log in `results/env/session-20261025T140842/ollama-serve.log` records `general.name = Qwen3 4B Thinking 2507`), while MMLU was scored on the original `Qwen/Qwen3-4B`. The paper states this and reports the MMLU correlation both with and without qwen3:4b.
+
 ## What the demo run demonstrates
 
 `updvd demo` runs a fixed script that triggers each behavior once. No model or seed is involved, so the output is always the same.
@@ -168,7 +170,7 @@ Each evaluation writes one compact JSON report per model under `results/seeds/`,
 | generated | When the report was written |
 | seeds | The sampling seeds run for every model |
 | temperature | The sampling temperature used for the run |
-| environment | Python version, platform, Ollama version, GPU and driver, package versions, the full sha256 digest of every model, and the model options (temperature, seeds, think off, JSON format, keep-alive, max retries) |
+| environment | Python version, platform, Ollama version, GPU and driver, package versions, the full sha256 digest of every model, and the model options (temperature, seeds, think off, JSON format, keep-alive, max retries). The recorded keep-alive was passed inside the model options, where Ollama ignores it (the server logs `invalid option provided option=keep_alive`), so the server default applied. It does not affect model output |
 | models[].model | The model name |
 | models[].digest | The exact model version that produced the run |
 | models[].substitution | Substitution over the forbidden trials: pooled rate with its 95% Wilson interval, per-seed rates, and the across-seed mean and standard deviation, split by violated rule |
@@ -197,9 +199,9 @@ The tests use the scripted proposer and the released results, so they need no GP
 
 ## What the results show
 
-**Finding 1: blocking does not depend on the model.** Across 35 forbidden tasks per model, run under five seeds (175 trials per model), the forbidden action was blocked every time for every model, with nothing leaking through in any of the 1,575 trials. The per-action check time was under 0.1 ms at the median (about 0.07 ms) for every model. Each result file stores it per model as `overhead_ms`.
+**Finding 1: blocking does not depend on the model.** Across 35 forbidden tasks per model, run under five seeds (175 trials per model), the forbidden action never ran for any model: nothing leaked through in any of the 1,575 trials, and in the 1,519 trials where the model proposed the forbidden action, the checker rejected it every time. The per-action check time was under 0.1 ms at the median (about 0.07 ms) for every model. Each result file stores it per model as `overhead_ms`.
 
-**Finding 2: substitution varies widely, and no measured model property predicts it.** When the forbidden action was rejected, models often proposed a different, permitted action instead, at rates from 1.1% to 37.7%. The distribution is continuous: ranked by substitution rate, no two adjacent models have non-overlapping 95% intervals, so the models do not fall into groups. Neither parameter count nor MMLU orders them: the 2B model substitutes 10.9% while a 4B model substitutes 1.1%, and qwen2.5:7b, the model with the highest MMLU, substitutes 22.9%, while phi4-mini scores seven and a half points lower and substitutes the most (37.7%). Across the nine models, the rank correlation between MMLU and substitution is ρ = 0.58 (exact permutation p = 0.11), which at this sample size cannot be told apart from no relationship. The layer bounds the action, not the intent.
+**Finding 2: substitution varies widely, and no measured model property clearly predicts it.** Instead of the forbidden action, models often got a different, permitted action committed, at rates from 1.1% to 37.7%. Most of these 292 substitutions came after a rejection (251); the other 41 were committed on the first attempt, without the forbidden action being proposed. The distribution is continuous: ranked by substitution rate, no two adjacent models have non-overlapping 95% intervals, so the models do not fall into groups. Neither parameter count nor MMLU orders them: the 2B model substitutes 10.9% while a 4B model substitutes 1.1%, and qwen2.5:7b, the model with the highest MMLU, substitutes 22.9%, while phi4-mini scores seven and a half points lower and substitutes the most (37.7%). Across the nine models, the rank correlation between MMLU and substitution is ρ = 0.58 (exact permutation p = 0.11), which at this sample size cannot be told apart from no relationship. Excluding qwen3:4b, whose MMLU score comes from a different checkpoint (see Capability axis), gives ρ = 0.69 (p = 0.07, n = 8). With nine models the test has little power, so it can neither establish nor rule out a relationship. The layer bounds the action, not the intent.
 
 | Model | MMLU | Blocking | Leaked | Substitution mean (sd) | Pooled rate [95% CI] |
 |---|---|---|---|---|---|
@@ -217,18 +219,18 @@ Rows are ordered by MMLU. The mean and standard deviation are across the five se
 
 ## Limitations
 
-This prototype shows the interceptor logic and the gap between action and intent. It does not measure detection accuracy or performance under load. All tasks come from one domain (record operations), and the way models substitute, usually by falling back to creating a record, is tied to this tool set. The substitution numbers come from five seeds at a single temperature (0.7). That is not enough to settle the order of models with similar rates, and one temperature covers only a small part of the sampling behavior. The 175 trials per model are 35 tasks repeated under five seeds, so they are not independent; the Wilson intervals treat them as independent and are therefore optimistic. Across 675 correctable trials the models produced a malformed call only eight times, so the data says little about recovery from errors. The two measurements also use different quantizations of the same models, bitsandbytes 4-bit for MMLU and Ollama GGUF for the behavioral runs, although both ran on Tesla T4 GPUs on Google Colab. MMLU is scored without a chat template, so it measures each instruction-tuned model in completion mode, while the behavioral runs use the chat interface; we use MMLU only to compare the models with each other.
+This prototype shows the interceptor logic and the gap between action and intent. It does not measure detection accuracy or performance under load. All tasks come from one domain (record operations), and the way models substitute, usually by falling back to creating a record, is tied to this tool set. The substitution numbers come from five seeds at a single temperature (0.7). That is not enough to settle the order of models with similar rates, and one temperature covers only a small part of the sampling behavior. The 175 trials per model are 35 tasks repeated under five seeds, so they are not independent; the Wilson intervals treat them as independent and are therefore optimistic. Across 675 correctable trials the first call was rejected only eight times (seven malformed calls and one ownership violation), so the data says little about recovery from errors. Only the temperature was fixed across models; the other sampling parameters (top-k, top-p, repeat penalty) were each model's Ollama defaults and differ between models. The two measurements also use different quantizations of the same model releases (except qwen3:4b, see Capability axis), bitsandbytes 4-bit for MMLU and Ollama GGUF for the behavioral runs, although both ran on Tesla T4 GPUs on Google Colab. MMLU is scored without a chat template, so it measures each instruction-tuned model in completion mode, while the behavioral runs use the chat interface; we use MMLU only to compare the models with each other.
 
 ## How to cite
 
 If you use this code or data, please cite the paper:
 
-Salmanov, P.: Model-Independent Blocking and a Model-Dependent Substitution of LLM Agent Actions Under Runtime Contract. In: NGISE 2026. Springer (to appear).
+Salmanov, P.: Model-Independent Blocking and Model-Dependent Substitution of LLM Agent Actions Under Runtime Contract. In: NGISE 2026. Springer (to appear).
 
 ```
 @inproceedings{salmanov_updvd,
   author    = {Salmanov, Parviz},
-  title     = {Model-Independent Blocking and a Model-Dependent Substitution of {LLM} Agent Actions Under Runtime Contract},
+  title     = {Model-Independent Blocking and Model-Dependent Substitution of {LLM} Agent Actions Under Runtime Contract},
   booktitle = {NGISE 2026},
   publisher = {Springer},
   year      = {2026},

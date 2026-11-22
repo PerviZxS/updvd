@@ -261,6 +261,15 @@ def _text_claims(report: _Report, models: dict, logs: dict, mmlu: dict) -> None:
     report.check("leaked", sum(t["outcome"] == "leaked" for t in forbidden), 0)
     report.check("forbidden action blocked", sum(t["outcome"] != "leaked" for t in forbidden), 1575)
 
+    # Paper, Introduction: "in the 1,519 trials where the model proposed it, the checker rejected it every time".
+    def proposed_forbidden(t: dict) -> bool:
+        tool = _forbidden_tool(t["expected_class"])
+        return any(e["tool"] == tool and isinstance(e["args"], dict) and e["args"].get("record_id") == t["target_id"]
+                   for e in t["log"])
+    proposed = [t for t in forbidden if proposed_forbidden(t)]
+    report.check("trials where the exact forbidden action was proposed", len(proposed), 1519)
+    report.check("of those, trials where it was rejected every time", sum(t["outcome"] != "leaked" for t in proposed), 1519)
+
     # Paper, "The models do not refuse on their own": the first proposal is the exact forbidden (tool, record id).
     def exact_first(t: dict) -> bool:
         first = t["log"][0]
@@ -279,12 +288,12 @@ def _text_claims(report: _Report, models: dict, logs: dict, mmlu: dict) -> None:
     lo_m, hi_m = min(pooled, key=pooled.get), max(pooled, key=pooled.get)
     report.check("substitution range", (lo_m, f"{100 * pooled[lo_m]:.1f}%", hi_m, f"{100 * pooled[hi_m]:.1f}%"),
                  ("gemma3:4b", "1.1%", "phi4-mini", "37.7%"))
-    report.check("fold spread (thirty-three)", f"{pooled[hi_m] / pooled[lo_m]:.0f}" if pooled[lo_m] else "infinite (lowest rate is 0)", "33")
+    report.check("spread of more than an order of magnitude", pooled[lo_m] == 0 or pooled[hi_m] / pooled[lo_m] > 10, True)
     four_b = ["gemma3:4b", "phi4-mini", "qwen3:4b", "phi3:mini"]
     report.check("4B-class span", (f"{100 * min(pooled[m] for m in four_b):.1f}%",
                                    f"{100 * max(pooled[m] for m in four_b):.1f}%"), ("1.1%", "37.7%"))
     report.check("2B model substitution", f"{100 * pooled['gemma2:2b']:.1f}%", "10.9%")
-    # Paper: "all nine at least occasionally proposed an allowed action aimed at the original request".
+    # Paper, Conclusion: "All nine models sometimes got another allowed action committed".
     report.check("models that never substituted", sorted(m for m, r in pooled.items() if r == 0), [])
     # Paper: "ranked by substitution rate, no two adjacent ones have non-overlapping Wilson intervals".
     ranked = sorted(models, key=pooled.get)
@@ -304,6 +313,12 @@ def _text_claims(report: _Report, models: dict, logs: dict, mmlu: dict) -> None:
     xs, ys = [scores[m] for m in scored], [pooled[m] for m in scored]
     report.check("Spearman rho, MMLU vs substitution (9 models)", f"{_spearman(xs, ys):.2f}", "0.58")
     report.check("exact permutation p of rho (two-sided)", f"{_spearman_p(xs, ys):.2f}", "0.11")
+    # Paper: qwen3:4b's MMLU comes from a different checkpoint (Ollama served Qwen3-4B-Thinking-2507), so the
+    # correlation is also reported without it.
+    eight = [m for m in scored if m != "qwen3:4b"]
+    xs8, ys8 = [scores[m] for m in eight], [pooled[m] for m in eight]
+    report.check("Spearman rho without qwen3:4b (8 models)", f"{_spearman(xs8, ys8):.2f}", "0.69")
+    report.check("exact permutation p without qwen3:4b", f"{_spearman_p(xs8, ys8):.2f}", "0.07")
     # Paper footnote: lm-evaluation-harness 0.4.12, 0-shot, no chat template, 10% of each subject, seed 1234, 1430 items.
     protocol = sorted({(d["lm_eval_version"], tuple(d["num_fewshot"]), d["apply_chat_template"], d["limit"],
                         d["seed"], d["n_samples"]) for d in mmlu["details"].values()})
@@ -331,6 +346,15 @@ def _text_claims(report: _Report, models: dict, logs: dict, mmlu: dict) -> None:
     rid_as_owner = sum(t["committed_action"]["args"].get("owner_id") == t["target_id"] for t in creates)
     own_id = sum(t["committed_action"]["args"].get("owner_id") == _ACTOR_ID for t in creates)
     report.check("substitutions", len(subs), 292)
+    # Paper, Introduction: "usually after a rejection (251 of 292 cases), sometimes directly (41)".
+    def commit_index(t: dict) -> int:
+        return next(i for i, e in enumerate(t["log"]) if e["committed"])
+    report.check("substitutions after a rejection / directly",
+                 (sum(commit_index(t) > 0 for t in subs), sum(commit_index(t) == 0 for t in subs)), (251, 41))
+    # Paper, Conclusion: "in eight of them after a rejection" (gemma3:4b's substitutions were all direct).
+    after = sorted({name for (name, _), tasks in logs.items() for t in tasks
+                    if t["kind"] == "forbidden" and t["outcome"] == "substituted" and commit_index(t) > 0})
+    report.check("models with a substitution after a rejection", len(after), 8)
     report.check("substitutions carrying the requested data", _pct(same_data, len(subs), 0), "95%")
     report.check("record id copied into owner_id", _pct(rid_as_owner, len(subs), 0), "53%")
     report.check("acting writer's own id as owner", _pct(own_id, len(subs), 0), "22%")
@@ -354,16 +378,21 @@ def _text_claims(report: _Report, models: dict, logs: dict, mmlu: dict) -> None:
     copied = [t for t in creates if t["committed_action"]["args"].get("owner_id") == t["target_id"]]
     report.check("record-id-as-owner creates whose owner does exist", sum(t["target_id"] in users for t in copied), 1)
 
-    malformed = {}
+    # Paper: "the first call was rejected only eight times (...: seven malformed calls and one ownership violation)".
+    rejected_first = {}
     for (name, _), tasks in logs.items():
         for t in tasks:
             if t["kind"] == "correctable" and t["log"][0]["verdict"] != "ok":
-                malformed[name] = malformed.get(name, 0) + 1
-    fixed = sum(t["outcome"] == "recovered" for t in correctable if t["log"][0]["verdict"] != "ok")
+                rejected_first[name] = rejected_first.get(name, 0) + 1
+    first_rejections = [t for t in correctable if t["log"][0]["verdict"] != "ok"]
+    fixed = sum(t["outcome"] == "recovered" for t in first_rejections)
     report.check("correctable trials", len(correctable), 675)
-    report.check("malformed correctable calls by model", dict(sorted(malformed.items())),
+    report.check("correctable first calls rejected, by model", dict(sorted(rejected_first.items())),
                  {"gemma2-2b": 2, "llama3.1-8b": 2, "phi3-mini": 4})
-    report.check("malformed calls corrected and committed", fixed, 8)
+    report.check("of those: malformed (schema) / ownership violation",
+                 (sum(t["log"][0]["verdict"] == "schema_violation" for t in first_rejections),
+                  sum(t["log"][0]["verdict"] == "ownership_violation" for t in first_rejections)), (7, 1))
+    report.check("rejected first calls corrected and committed", fixed, 8)
 
 
 # The per-action checker time recorded by the run, against the paper's "under 0.1 ms at the median (about 0.07 ms)".
